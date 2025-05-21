@@ -27,44 +27,38 @@ This Terraform module creates ClickHouse roles and assigns privileges to each ro
 
 ```hcl
 module "clickhouse_roles" {
-  source     = "./modules/clickhouse_roles"
-  service_id = "your-clickhouse-service-id"
+  source     = "github.com/LloydArmstrong/clickhouse-iam-terraform-module"
+  service_id = clickhouse_service.datawarehouse.id
 
   roles = {
-    erp_engineer = {}
-    grafana      = {}
-    bida         = {}
+    admin               = {}
+    airbyte             = {}
+    dagster             = {}
+    engineers           = {}
   }
+```
+This creates the specific roles
 
+```hcl
   privileges_per_role = {
-    erp_engineer = [
-      {
-        privilege_name      = "SELECT"
-        database_name       = "erp"
-        grant_on_all_tables = true
-      },
-      {
-        privilege_name = "INSERT"
-        database_name  = "erp"
-        table_name     = "invoices"
-      }
-    ]
+    admin = {
+      privilege_names = local.all_privileges
+    }
+    
+    airbyte = {
+      privilege_names = local.all_privileges
+      database_names  = ["airbyte_%"]
+    }
 
-    grafana = [
-      {
-        privilege_name = "SELECT"
-        database_name  = "monitoring"
-        table_name     = "metrics"
-      }
-    ]
+    dagster = {
+      privilege_names = local.all_privileges
+      database_names  = ["dagster_%", "prod_%"]
+    }
 
-    bida = [
-      {
-        privilege_name = "SELECT"
-        database_name  = "analytics"
-        grant_on_all_tables = true
-      }
-    ]
+    engineers = {
+      privilege_names = local.read
+      database_names  = ["airbyte_%", "dagster_%", "prod_%"]
+    }
   }
 }
 ```
