@@ -25,6 +25,8 @@ This Terraform module creates ClickHouse roles and assigns privileges to each ro
 
 ## 🔧 Usage
 
+This creates the specific roles
+
 ```hcl
 module "clickhouse_roles" {
   source     = "github.com/LloydArmstrong/clickhouse-iam-terraform-module"
@@ -37,7 +39,8 @@ module "clickhouse_roles" {
     engineers           = {}
   }
 ```
-This creates the specific roles
+
+...and then we add privileges to these created roles.
 
 ```hcl
   privileges_per_role = {
