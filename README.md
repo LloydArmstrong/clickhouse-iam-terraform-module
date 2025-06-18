@@ -18,7 +18,7 @@ This Terraform module creates ClickHouse roles and assigns privileges to each ro
 ## ✅ Requirements
 
 - Terraform 1.3+
-- ClickHouse Terraform Provider (v3+)
+- ClickHouse Terraform Provider - **ONLY 3.2.0-alpha1**
 - ClickHouse Cloud or compatible service
 
 ---
