@@ -4,6 +4,7 @@
 This Terraform module creates ClickHouse roles and assigns privileges to each role using the [ClickHouse Terraform Provider](https://registry.terraform.io/providers/ClickHouse/clickhouse/latest).
 
 **NB!!! The module does not handle column and table specific permissions yet. Only creating Roles and assigning priveleges to Roles. Upcoming updates will add additional funtionality.**
+**There is also currently NO support for importing already assigned roles into Terraform**
 
 ---
 
